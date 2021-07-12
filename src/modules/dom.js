@@ -1,44 +1,58 @@
 import { player1, player2 } from './players';
+import random from './helpers';
 
-const grid1 = document.querySelector('.grid-1');
-const grid2 = document.querySelector('.grid-2');
+const playerMainDiv = document.querySelector('.player-grid-container');
+const aiMainDiv = document.querySelector('.ai-grid-container');
 
-function createGrids() {
-  for (let i = 0; i < 100; i += 1) {
-    const div = document.createElement('div');
-    const div2 = document.createElement('div');
-    div.classList.add('box');
-    div2.classList.add('box');
-    div.setAttribute('id', i);
-    div2.setAttribute('id', i);
-    grid1.appendChild(div);
-    grid2.appendChild(div2);
+function createGrid() {
+  for (let i = 0; i < 10; i += 1) {
+    const row = document.createElement('div');
+    row.setAttribute('id', i);
+    row.classList.add(`row-${i}`);
+    row.classList.add('row');
+
+    const row2 = document.createElement('div');
+    row2.setAttribute('id', i);
+    row2.classList.add(`row-2-${i}`);
+    row2.classList.add('row');
+
+    for (let j = 0; j < 10; j += 1) {
+      const col = document.createElement('div');
+      col.classList.add('box');
+      col.classList.add(`box-${j}`);
+      row.appendChild(col);
+
+      const col2 = document.createElement('div');
+      col2.classList.add('box');
+      col2.classList.add(`box-2-${j}`);
+      row2.appendChild(col2);
+    }
+    playerMainDiv.appendChild(row);
+    aiMainDiv.appendChild(row2);
   }
 }
-createGrids();
+createGrid();
 
-const playerBoard = document.querySelectorAll('.grid-1 .box');
-const aiBoard = document.querySelectorAll('.grid-2 .box');
+function randomHit() {
+  const randomRow = random(0, 9);
+  const randomColm = random(0, 9);
+  console.log([randomRow, randomColm]);
+  player2.attack(player1, [randomRow, randomColm]);
+  const innerDiv = document.querySelector(`.row-${randomRow} .box-${randomColm}`);
+  innerDiv.textContent = 'X';
+}
 
 function hitEvent() {
-  let m = 0;
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
-      aiBoard[m].addEventListener('click', (e) => {
+      const innerDiv = document.querySelector(`.row-2-${i} .box-2-${j}`);
+      innerDiv.addEventListener('click', (e) => {
         if (player2.gameboard.board[i][j] === 1) {
           e.target.textContent = 'X';
         }
         player1.attack(player2, [i, j]);
+        randomHit();
       }, { once: true });
-
-      /*       playerBoard[m].addEventListener('click', (e) => {
-        if (player1.gameboard.board[i][j] === 1) {
-          e.target.textContent = 'X';
-        }
-        player2.attack(player1, [i, j]);
-      }, { once: true }); */
-
-      m += 1;
     }
   }
 }

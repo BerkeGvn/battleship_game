@@ -9,6 +9,8 @@ function gameboardFactory() {
     board.push(row);
   }
 
+  let isGameover = false;
+
   // Teams entire fleet
   const carrier = shipFactory(5, 'carrier');
   const battleship = shipFactory(4, 'battleship', 'vertical');
@@ -27,6 +29,7 @@ function gameboardFactory() {
 
   function gameover() {
     if (fleet.every((ship) => ship.details.isSunk === true)) {
+      isGameover = true;
       return true;
     }
     return false;
@@ -159,6 +162,7 @@ function gameboardFactory() {
       return console.log('That coordinates already hit');
     }
     if (board[coord[0]][coord[1]] === 1) {
+      console.log('succesfull hit!');
       board[coord[0]][coord[1]] = '#';
       return calculateHitLoc(coord);
     }
@@ -167,7 +171,7 @@ function gameboardFactory() {
     return board[coord[0]][coord[1]] = '#';
   }
   return {
-    board, fleet, placeShip, receiveAttack,
+    board, isGameover, fleet, placeShip, receiveAttack,
   };
 }
 
