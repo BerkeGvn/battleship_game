@@ -9,8 +9,6 @@ function gameboardFactory() {
     board.push(row);
   }
 
-  let isGameover = false;
-
   // Teams entire fleet
   const carrier = shipFactory(5, 'carrier');
   const battleship = shipFactory(4, 'battleship', 'vertical');
@@ -29,7 +27,6 @@ function gameboardFactory() {
 
   function gameover() {
     if (fleet.every((ship) => ship.details.isSunk === true)) {
-      isGameover = true;
       return true;
     }
     return false;
@@ -56,6 +53,16 @@ function gameboardFactory() {
       }
     }
   }
+  // Preventing board elements to be more than 10
+  function preventOverExtend(position, ship) {
+    if (ship.details.direction === 'vertical' && position[0] + ship.shipSize.length > 10) {
+      console.log(position[0] + ship.shipSize.length);
+      return true;
+    } if (ship.details.direction === 'horizontal' && position[1] + ship.shipSize.length > 10) {
+      return true;
+    }
+    return false;
+  }
 
   // Checking coordinates if there is a ship already
   function checkCoordinates(coord, ship) {
@@ -79,18 +86,25 @@ function gameboardFactory() {
   }
 
   function placeShip(position, ship) {
-    if (ship.details.direction === 'vertical') {
-      for (let i = 0; i < ship.shipSize.length; i += 1) {
-        board[position[0] + i].splice(position[1], 1, 1);
-      }
-      return recordShips(position, ship, 'vertical');
+    if (preventOverExtend(position, ship)) {
+      return false;
     }
     if (checkCoordinates(position, ship)) {
       console.log('This place is occupied');
       return false;
     }
+
+    if (ship.details.direction === 'vertical') {
+      for (let i = 0; i < ship.shipSize.length; i += 1) {
+        board[position[0] + i].splice(position[1], 1, 1);
+      }
+      recordShips(position, ship, 'vertical');
+      return true;
+    }
+
     board[position[0]].splice(position[1], ship.shipSize.length, ...ship.shipSize);
-    return recordShips(position, ship);
+    recordShips(position, ship);
+    return true;
   }
 
   function hitTheShip(name, damagedPosition) {
@@ -134,7 +148,7 @@ function gameboardFactory() {
         return false;
     }
     if (gameover()) {
-      return console.log('Gameover');
+      return true;
     }
     return 'Right on spot!';
   }
@@ -171,7 +185,7 @@ function gameboardFactory() {
     return board[coord[0]][coord[1]] = '#';
   }
   return {
-    board, isGameover, fleet, placeShip, receiveAttack,
+    board, gameover, fleet, placeShip, receiveAttack,
   };
 }
 
