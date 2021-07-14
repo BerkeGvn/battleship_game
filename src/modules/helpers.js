@@ -1,2 +1,3 @@
 const random = (min, max) => Math.floor(Math.random() * (max - min)) + min;
-export default random;
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+export { random, sleep };

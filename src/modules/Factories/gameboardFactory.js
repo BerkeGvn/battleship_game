@@ -56,7 +56,6 @@ function gameboardFactory() {
   // Preventing board elements to be more than 10
   function preventOverExtend(position, ship) {
     if (ship.details.direction === 'vertical' && position[0] + ship.shipSize.length > 10) {
-      console.log(position[0] + ship.shipSize.length);
       return true;
     } if (ship.details.direction === 'horizontal' && position[1] + ship.shipSize.length > 10) {
       return true;
@@ -90,7 +89,6 @@ function gameboardFactory() {
       return false;
     }
     if (checkCoordinates(position, ship)) {
-      console.log('This place is occupied');
       return false;
     }
 
@@ -154,8 +152,12 @@ function gameboardFactory() {
   }
 
   function calculateHitLoc(coord) {
-    const receivedCoord = fleet.filter((val) => val.details.row === coord[0]
-      || val.details.column === coord[1]);
+    // Sorunlu
+
+    const receivedCoord = fleet.filter((val) => (val.details.row === coord[0]
+      && val.details.position.includes(coord[1]))
+      || (val.details.column === coord[1]
+        && val.details.position.includes(coord[0])));
 
     let damagedShip;
     let damagedPosition;
@@ -167,16 +169,16 @@ function gameboardFactory() {
       damagedShip = receivedCoord.filter((val) => val.details.position.includes(coord[1]));
       damagedPosition = damagedShip[0].details.position.indexOf(coord[1]);
     }
+
     const name = damagedShip[0].details.name;
     return hitTheShip(name, damagedPosition);
   }
 
   function receiveAttack(coord) {
     if (board[coord[0]][coord[1]] === '#') {
-      return console.log('That coordinates already hit');
+      return false;
     }
     if (board[coord[0]][coord[1]] === 1) {
-      console.log('succesfull hit!');
       board[coord[0]][coord[1]] = '#';
       return calculateHitLoc(coord);
     }

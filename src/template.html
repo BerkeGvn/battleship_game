@@ -7,9 +7,39 @@
     <title>Test</title>
   </head>
   <body>
+    <button class="start">Start</button>
+    <button class="render">render</button>
+    <div class="fleet">
+      <div class="ships carrier-container horizontal" draggable="true" data-length="5">
+        <div class="ship carrier" data-name="carrier" data-index="0"></div>
+        <div class="ship carrier" data-name="carrier" data-index="1"></div>
+        <div class="ship carrier" data-name="carrier" data-index="2"></div>
+        <div class="ship carrier" data-name="carrier" data-index="3"></div>
+        <div class="ship carrier" data-name="carrier" data-index="4"></div>
+      </div>
+      <div class="ships battleship-container vertical" draggable="true" data-length="4">
+        <div class="ship battleship" data-name="battleship" data-index="0"></div>
+        <div class="ship battleship" data-name="battleship" data-index="1"></div>
+        <div class="ship battleship" data-name="battleship" data-index="2"></div>
+        <div class="ship battleship" data-name="battleship" data-index="3"></div>
+      </div>
+      <div class="ships cruiser-container horizontal" draggable="true" data-length="4">
+        <div class="ship cruiser" data-name="cruiser" data-index="0"></div>
+        <div class="ship cruiser" data-name="cruiser" data-index="1"></div>
+        <div class="ship cruiser" data-name="cruiser" data-index="2"></div>
+      </div>
+      <div class="ships destroyer1-container horizontal" draggable="true" data-length="4">
+        <div class="ship destroyer1" data-name="destroyer1" data-index="0"></div>
+        <div class="ship destroyer1" data-name="destroyer1" data-index="1"></div>
+      </div>
+      <div class="ships destroyer2-container horizontal" draggable="true" data-length="4">
+        <div class="ship destroyer2" data-name="destroyer2" data-index="0"></div>
+        <div class="ship destroyer2" data-name="destroyer2" data-index="1"></div>
+      </div>
+    </div>
     <div class="container">
-      <div class="player-grid-container grid-container"></div>
-      <div class="ai-grid-container grid-container"></div>
+      <!--       <div class="player-grid-container grid-container"></div>
+      <div class="ai-grid-container grid-container"></div> -->
     </div>
   </body>
 </html>

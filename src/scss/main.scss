@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
   height: 100vh;
 }
@@ -23,4 +22,43 @@
   align-items: center;
   justify-content: center;
   font-size: 2em;
+}
+.red {
+  border: 1px solid rgb(224, 21, 21);
+}
+.black {
+  background-color: black;
+}
+.carrier-container {
+  display: flex;
+}
+.fleet {
+  display: flex;
+}
+.ships {
+  margin: 1rem;
+}
+.ship {
+  border: 1px solid rgb(180, 175, 175);
+  background-color: black;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+}
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+.hover {
+  background-color: rgb(94, 92, 90);
+}
+.none {
+  display: none;
 }
