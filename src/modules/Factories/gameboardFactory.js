@@ -106,54 +106,14 @@ function gameboardFactory() {
   }
 
   function hitTheShip(name, damagedPosition) {
-    switch (name) {
-      case 'carrier':
-        carrier.hit(damagedPosition);
-        if (carrier.isSink()) {
-          carrier.details.isSunk = true;
-        }
-        break;
-
-      case 'battleship':
-        battleship.hit(damagedPosition);
-        if (battleship.isSink()) {
-          battleship.details.isSunk = true;
-        }
-        break;
-
-      case 'cruiser':
-        cruiser.hit(damagedPosition);
-        if (cruiser.isSink()) {
-          cruiser.details.isSunk = true;
-        }
-        break;
-
-      case 'destroyer1':
-        destroyer1.hit(damagedPosition);
-        if (destroyer1.isSink()) {
-          destroyer1.details.isSunk = true;
-        }
-        break;
-
-      case 'destroyer2':
-        destroyer2.hit(damagedPosition);
-        if (destroyer2.isSink()) {
-          destroyer2.details.isSunk = true;
-        }
-        break;
-
-      default:
-        return false;
+    const shipIndex = fleet.findIndex((ship) => ship.details.name === name);
+    fleet[shipIndex].hit(damagedPosition);
+    if (fleet[shipIndex].isSink()) {
+      fleet[shipIndex].details.isSunk = true;
     }
-    if (gameover()) {
-      return true;
-    }
-    return 'Right on spot!';
   }
 
   function calculateHitLoc(coord) {
-    // Sorunlu
-
     const receivedCoord = fleet.filter((val) => (val.details.row === coord[0]
       && val.details.position.includes(coord[1]))
       || (val.details.column === coord[1]

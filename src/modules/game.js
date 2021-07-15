@@ -14,55 +14,32 @@ function checkGameover() {
 }
 
 let playerTurn = true;
+const randomHitCoord = [];
 
-function checkAgain(player, ship) {
-  const randomRow = random(0, 9);
-  const randomColm = random(0, 9);
-  const properPlaced = player.gameboard.placeShip([randomRow, randomColm], ship);
-  if (properPlaced) {
-    player.gameboard.placeShip([randomRow, randomColm], ship);
-
-    return true;
-  }
-  return checkAgain(player, ship);
-}
-
-function randomPlacement(player) {
-  player.gameboard.fleet.forEach((ship) => {
-    let randomRow = random(0, 9);
-    let randomColm = random(0, 9);
-    const properPlaced = player.gameboard.placeShip([randomRow, randomColm], ship);
-    if (properPlaced) {
-      player.gameboard.placeShip([randomRow, randomColm], ship);
-      randomRow = random(0, 9);
-      randomColm = random(0, 9);
-    } else {
-      checkAgain(player, ship);
-    }
-  });
-}
-randomPlacement(player2);
 async function randomHit() {
   const randomRow = random(0, 10);
-  const randomColm = random(0, 10);
-  await sleep(500);
+  const randomColumn = random(0, 10);
+  if (randomHitCoord.includes(`${randomRow}${randomColumn}`)) {
+    return randomHit();
+  }
+  randomHitCoord.push(`${randomRow}${randomColumn}`);
+  console.log(randomHitCoord);
+  await sleep(300);
 
-  const innerDiv = document.querySelector(`.row-${randomRow} .box-${randomColm}`);
+  const innerDiv = document.querySelector(`.row-${randomRow} .box-${randomColumn}`);
 
-  if (player1.gameboard.board[randomRow][randomColm] === 1) {
+  if (player1.gameboard.board[randomRow][randomColumn] === 1) {
     innerDiv.classList.add('red');
     innerDiv.textContent = 'O';
-  } else if (player1.gameboard.board[randomRow][randomColm] === '#') {
-    randomHit();
   } else {
     innerDiv.textContent = 'X';
   }
 
-  player2.attack(player1, [randomRow, randomColm]);
+  player2.attack(player1, [randomRow, randomColumn]);
 
   checkGameover();
-
   playerTurn = true;
+  return playerTurn;
 }
 
 function markShipDivs() {
@@ -115,7 +92,11 @@ function hitEvent() {
 function game() {
   hitEvent();
 }
+/* function resetEnemyBoard() {
+  randomPlacement(player2);
+  enemyship();
+} */
 
 export {
-  game, markShipDivs, randomPlacement, enemyship,
+  game, markShipDivs, randomHitCoord, enemyship,
 };

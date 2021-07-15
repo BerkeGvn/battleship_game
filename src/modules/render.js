@@ -1,8 +1,8 @@
 import { container, ships } from './domElements';
 import createGrid from './grid';
-import { player2, resetPlayers } from './players';
+import { player2, resetPlayers, randomPlacement } from './players';
 import dragAndRotate from './dragAndRotate';
-import { randomPlacement, enemyship } from './game';
+import { enemyship, randomHitCoord } from './game';
 
 function removeGrids() {
   while (container.firstChild) {
@@ -24,6 +24,8 @@ function render() {
   displayShipContainer();
   resetPlayers();
   randomPlacement(player2);
+  // This resets already hit locations
+  randomHitCoord.splice(0, randomHitCoord.length);
   enemyship();
   console.log(player2.gameboard.board);
   console.log(player2.gameboard.fleet);
