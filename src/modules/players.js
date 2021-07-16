@@ -1,9 +1,8 @@
-/* eslint-disable import/no-mutable-exports */
 import Player from './Factories/Player';
 import { random } from './helpers';
 
 let player1 = Player();
-let player2 = Player(true);
+let player2 = Player();
 
 function resetPlayers() {
   player1 = Player();

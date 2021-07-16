@@ -1,6 +1,8 @@
 import { player1 } from './players';
 import { markShipDivs } from './game';
+import { startBtn, fleetContainer } from './domElements';
 
+let shipOnBoard = 0;
 const dragAndRotate = (() => {
   const ships = document.querySelectorAll('.ships');
   const gridCells = document.querySelectorAll('.box');
@@ -26,7 +28,6 @@ const dragAndRotate = (() => {
 
   function drag(cells = gridCells) {
     const getDraggedShipIndex = (e) => {
-    // eslint-disable-next-line max-len
       shipIndex = player1.gameboard.fleet.findIndex((ship) => ship.details.name === e.target.dataset.name);
     };
 
@@ -52,8 +53,16 @@ const dragAndRotate = (() => {
 
       const properPlaced = player1.gameboard.placeShip([y, x], player1.gameboard.fleet[shipIndex]);
       if (properPlaced) {
-        /* draggedShip.parentElement.removeChild(draggedShip); */
+        shipOnBoard += 1;
         draggedShip.classList.add('none');
+      }
+      if (shipOnBoard === 5) {
+        startBtn.classList.remove('fadeout');
+        startBtn.classList.remove('invisible');
+        startBtn.classList.add('fadein');
+        fleetContainer.classList.add('shrink');
+
+        shipOnBoard = 0;
       }
 
       markShipDivs();

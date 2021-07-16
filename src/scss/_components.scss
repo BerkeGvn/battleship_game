@@ -1,0 +1,224 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.header {
+  font-size: 7.5rem;
+  text-align: center;
+  @media only screen and (max-height: 52.18em) {
+    font-size: 6rem;
+  }
+  @media only screen and (max-height: 40.9em) {
+    font-size: 5.5rem;
+  }
+}
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-color-2);
+  color: var(--main-color-4);
+  border: 1px solid var(--main-color-4);
+  width: 17rem;
+  height: 5rem;
+  font-size: 4rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+  @media only screen and (max-height: 52.18em) {
+    width: 15rem;
+    height: 4rem;
+  }
+  @media only screen and (max-height: 40.9em) {
+    font-size: 3rem;
+  }
+}
+.start {
+  position: absolute;
+  top: 9rem;
+  @media only screen and (max-height: 40.9em) {
+    top: 7rem;
+  }
+}
+.fleet-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+  height: 25rem;
+  @media only screen and (max-height: 40.9em) {
+    height: 20rem;
+  }
+}
+.fleet-text {
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+  text-decoration: underline;
+  text-align: center;
+  @media only screen and (max-height: 52.18em) {
+    font-size: 2rem;
+  }
+  @media only screen and (max-height: 40.9em) {
+    font-size: 1.7rem;
+  }
+}
+
+.fleet {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ships {
+  margin: 1rem;
+}
+.ship {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: var(--main-color-4);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  @media only screen and (max-height: 52.18em) {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  @media only screen and (max-height: 40.9em) {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-main-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  @media only screen and (max-width: 43.75em) {
+    flex-direction: column;
+  }
+}
+
+.grid-container {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+
+  background-color: var(--main-color-3);
+}
+.grid-name {
+  background-color: var(--main-color-2);
+  text-align: center;
+  font-size: 2.5rem;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+}
+.box {
+  border: 1px solid var(--main-color-4);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  @media only screen and (max-height: 52.18em) {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  @media only screen and (max-height: 40.9em) {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
+.result {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--main-color-2);
+}
+.winner {
+  font-size: 10rem;
+  margin-bottom: 4rem;
+  @media only screen and (max-height: 40.9em) {
+    font-size: 7rem;
+  }
+}
+.x {
+  &::before,
+  ::after {
+    content: " ";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgb(145, 36, 36);
+    cursor: not-allowed;
+  }
+}
+.o {
+  &::before,
+  ::after {
+    content: " ";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: rgb(22, 85, 5);
+    cursor: not-allowed;
+  }
+}
+
+.mark {
+  background-color: var(--main-color-4);
+}
+
+.hover {
+  background-color: rgb(94, 92, 90);
+}
+.fadeout {
+  visibility: hidden;
+  transition: all 2s;
+  opacity: 0;
+}
+.none {
+  display: none;
+}
+.shrink {
+  transition: all 2s;
+  opacity: 0;
+  visibility: hidden;
+  height: 2rem;
+}
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+}
+.fadein {
+  opacity: 1;
+  visibility: visible;
+  transition: all 2s;
+}

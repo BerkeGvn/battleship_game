@@ -1,16 +1,22 @@
 import { player1, player2 } from './players';
 import { random, sleep } from './helpers';
 import createGrid from './grid';
+import { resultScreen, winner } from './domElements';
 
 createGrid();
 
 function checkGameover() {
   if (player1.gameboard.gameover()) {
-    console.log('Player 2 wins!');
+    winner.textContent = 'You lose!';
+    resultScreen.classList.remove('none');
+    return true;
   }
   if (player2.gameboard.gameover()) {
-    console.log('Player 1 wins!');
+    winner.textContent = 'You win!';
+    resultScreen.classList.remove('none');
+    return true;
   }
+  return false;
 }
 
 let playerTurn = true;
@@ -23,16 +29,14 @@ async function randomHit() {
     return randomHit();
   }
   randomHitCoord.push(`${randomRow}${randomColumn}`);
-  console.log(randomHitCoord);
   await sleep(300);
 
   const innerDiv = document.querySelector(`.row-${randomRow} .box-${randomColumn}`);
 
   if (player1.gameboard.board[randomRow][randomColumn] === 1) {
-    innerDiv.classList.add('red');
-    innerDiv.textContent = 'O';
+    innerDiv.classList.add('x');
   } else {
-    innerDiv.textContent = 'X';
+    innerDiv.classList.add('o');
   }
 
   player2.attack(player1, [randomRow, randomColumn]);
@@ -46,40 +50,31 @@ function markShipDivs() {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
       if (player1.gameboard.board[i][j] === 1) {
-        const innerDiv = document.querySelector(`.row-${i} .box-${j}`);
-        innerDiv.classList.add('black');
+        const box = document.querySelector(`.row-${i} .box-${j}`);
+        box.classList.add('mark');
       }
     }
   }
 }
-// for testing
-function enemyship() {
-  for (let i = 0; i < 10; i += 1) {
-    for (let j = 0; j < 10; j += 1) {
-      if (player2.gameboard.board[i][j] === 1) {
-        const innerDiv = document.querySelector(`.row-2-${i} .box-2-${j}`);
-        innerDiv.classList.add('black');
-      }
-    }
-  }
-}
-
-enemyship();
 
 markShipDivs();
 
 function hitEvent() {
   for (let i = 0; i < 10; i += 1) {
     for (let j = 0; j < 10; j += 1) {
-      const innerDiv = document.querySelector(`.row-2-${i} .box-2-${j}`);
-      // eslint-disable-next-line no-loop-func
-      innerDiv.addEventListener('click', (e) => {
+      const aq = document.querySelector(`.row-2-${i} .box-2-${j}`);
+
+      aq.addEventListener('click', (e) => {
         if (playerTurn) {
           if (player2.gameboard.board[i][j] === 1) {
-            e.target.textContent = 'X';
+            e.target.classList.add('x');
+          } else {
+            e.target.classList.add('o');
           }
           player1.attack(player2, [i, j]);
-          checkGameover();
+          if (checkGameover()) {
+            return;
+          }
           randomHit();
 
           playerTurn = false;
@@ -89,14 +84,6 @@ function hitEvent() {
   }
 }
 
-function game() {
-  hitEvent();
-}
-/* function resetEnemyBoard() {
-  randomPlacement(player2);
-  enemyship();
-} */
-
 export {
-  game, markShipDivs, randomHitCoord, enemyship,
+  hitEvent, markShipDivs, randomHitCoord,
 };

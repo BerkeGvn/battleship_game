@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import shipFactory from './shipFactory';
 
 function gameboardFactory() {
@@ -130,7 +129,7 @@ function gameboardFactory() {
       damagedPosition = damagedShip[0].details.position.indexOf(coord[1]);
     }
 
-    const name = damagedShip[0].details.name;
+    const { name } = damagedShip[0].details;
     return hitTheShip(name, damagedPosition);
   }
 
@@ -142,8 +141,7 @@ function gameboardFactory() {
       board[coord[0]][coord[1]] = '#';
       return calculateHitLoc(coord);
     }
-    /// ////////////////////////////////
-    // eslint-disable-next-line no-return-assign
+
     return board[coord[0]][coord[1]] = '#';
   }
   return {

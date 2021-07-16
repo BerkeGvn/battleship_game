@@ -4,10 +4,22 @@ function createGrid() {
   const playerMainDiv = document.createElement('div');
   const aiMainDiv = document.createElement('div');
 
+  const player1Board = document.createElement('h1');
+  player1Board.textContent = 'Your Board';
+  player1Board.classList.add('grid-name');
+  const player2Board = document.createElement('h1');
+  player2Board.textContent = 'Enemey Board';
+  player2Board.classList.add('grid-name');
+
+  playerMainDiv.appendChild(player1Board);
+  aiMainDiv.appendChild(player2Board);
+
   playerMainDiv.classList.add('player-grid-container');
   playerMainDiv.classList.add('grid-container');
   aiMainDiv.classList.add('ai-grid-container');
   aiMainDiv.classList.add('grid-container');
+  aiMainDiv.classList.add('none');
+  aiMainDiv.classList.add('invisible');
   for (let i = 0; i < 10; i += 1) {
     const row = document.createElement('div');
     row.setAttribute('id', i);
