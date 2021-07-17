@@ -115,6 +115,9 @@
   @media only screen and (max-width: 43.75em) {
     flex-direction: column;
   }
+  @media only screen and (max-height: 40.9em) {
+    margin-top: 6rem;
+  }
 }
 
 .grid-container {
