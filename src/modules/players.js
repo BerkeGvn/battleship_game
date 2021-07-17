@@ -33,7 +33,7 @@ function randomPlacement(player) {
   player.gameboard.fleet.forEach((ship) => {
     const randomCoord = randomNumbers(player, ship, placedCoord);
     placedCoord.push(`${randomCoord[0]}${randomCoord[1]}`);
-    console.log(ship);
+    c;
     player.gameboard.placeShip(randomCoord, ship);
   });
 }
