@@ -54,6 +54,9 @@
   @media only screen and (max-height: 40.9em) {
     height: 20rem;
   }
+  @media (hover: none) {
+    display: none;
+  }
 }
 .fleet-text {
   font-size: 2.5rem;
@@ -147,6 +150,9 @@
     height: 3.2rem;
   }
 }
+.random {
+  font-size: 2.5rem;
+}
 .result {
   z-index: 1;
   display: flex;
@@ -194,6 +200,7 @@
 
 .mark {
   background-color: var(--main-color-4);
+  border: 1px solid rgba(0, 0, 0, 0.141);
 }
 
 .hover {

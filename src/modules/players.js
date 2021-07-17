@@ -8,6 +8,15 @@ function resetPlayers() {
   player1 = Player();
   player2 = Player(true);
 }
+function randomDirection(player) {
+  player.gameboard.fleet.forEach((ship) => {
+    const position = random(0, 2);
+    if (position === 1) {
+      ship.details.direction = 'vertical';
+    }
+  });
+}
+
 function randomNumbers(player, ship, placedCoord) {
   const randomRow = random(0, 9);
   const randomColumn = random(0, 9);
@@ -20,9 +29,11 @@ function randomNumbers(player, ship, placedCoord) {
 
 function randomPlacement(player) {
   const placedCoord = [];
+  randomDirection(player);
   player.gameboard.fleet.forEach((ship) => {
     const randomCoord = randomNumbers(player, ship, placedCoord);
     placedCoord.push(`${randomCoord[0]}${randomCoord[1]}`);
+    console.log(ship);
     player.gameboard.placeShip(randomCoord, ship);
   });
 }

@@ -1,14 +1,15 @@
 import {
-  container, ships, fleetContainer, resultScreen,
+  container, ships, fleetContainer, resultScreen, randomBtn,
 } from './domElements';
 import createGrid from './grid';
 import { player2, resetPlayers, randomPlacement } from './players';
 import dragAndRotate from './dragAndRotate';
-import { randomHitCoord } from './game';
+import { aiReset } from './ai';
 
 function resetDomElements() {
   fleetContainer.classList.remove('shrink');
   resultScreen.classList.add('none');
+  randomBtn.classList.add('fadein');
 }
 
 function removeGrids() {
@@ -33,8 +34,7 @@ function render() {
   resetPlayers();
   randomPlacement(player2);
   resetDomElements();
-  // This resets already hit locations
-  randomHitCoord.splice(0, randomHitCoord.length);
+  aiReset();
 }
 
 export default render;

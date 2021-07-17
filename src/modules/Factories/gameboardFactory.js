@@ -10,7 +10,7 @@ function gameboardFactory() {
 
   // Teams entire fleet
   const carrier = shipFactory(5, 'carrier');
-  const battleship = shipFactory(4, 'battleship', 'vertical');
+  const battleship = shipFactory(4, 'battleship');
   const cruiser = shipFactory(3, 'cruiser');
   const destroyer1 = shipFactory(2, 'destroyer1');
   const destroyer2 = shipFactory(2, 'destroyer2');

@@ -6,7 +6,7 @@ const cells = document.querySelectorAll('.box');
 const ships = document.querySelectorAll('.ships');
 const resultScreen = document.querySelector('.result');
 const winner = document.querySelector('.winner');
-
+const randomBtn = document.querySelector('.random');
 export {
-  container, fleetContainer, startBtn, renderBtn, cells, ships, resultScreen, winner,
+  container, fleetContainer, startBtn, renderBtn, cells, ships, resultScreen, winner, randomBtn,
 };
